@@ -1,0 +1,15 @@
+{
+  "name": "klausbot",
+  "version": "1.0.0",
+  "description": "A useful bot for GroupMe chats.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "chrono-node": "^1.3.5",
+    "director": "",
+    "request": "^2.88.0",
+    "urban-dictionary": "^2.2.1"
+  }
+}
