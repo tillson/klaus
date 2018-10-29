@@ -2,12 +2,15 @@ var http = require('http');
 var director = require('director');
 var bot = require('./bot.js');
 
+require('dotenv').config()
+
 /* Enabling Modules */
 bot.modules.push(require('./commands/ask'));
 bot.modules.push(require('./commands/phish'));
 bot.modules.push(require('./commands/shitpost'));
 bot.modules.push(require('./commands/urban'));
 bot.modules.push(require('./commands/source'));
+bot.modules.push(require('./commands/weather'));
 
 //
 
