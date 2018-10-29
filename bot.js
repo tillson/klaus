@@ -10,10 +10,6 @@ function respond() {
   if (!textMessage) {
     return;
   }
-  if (textMessage.text.indexOf('sad boi hours') > -1 || textMessage.text.indexOf('sadboi hours') > -1) {
-    postMessage('@Chandler Clemmons', 24328365, [0, '@Chandler Clemmons'.length]);
-    return;
-  }
   var command = textMessage.text.split(' ')[0];
   var query = textMessage.text.substr(textMessage.text.indexOf(' ') + 1).replace('!', '');
   for (module of exports.modules) {
