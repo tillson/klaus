@@ -10,7 +10,7 @@ function respond() {
   if (!textMessage) {
     return;
   }
-  if (textMessage.indexOf('sad boi hours') > -1 || textMessage.indexOf('sadboi hours')) {
+  if (textMessage.indexOf('sad boi hours') > -1 || textMessage.indexOf('sadboi hours') > -1) {
     postMessage('@Chandler Clemmons', 24328365, [0, '@Chandler Clemmons'.length]);
     return;
   }
