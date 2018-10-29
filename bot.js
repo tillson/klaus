@@ -10,9 +10,12 @@ function respond() {
   if (!textMessage) {
     return;
   }
-
+  if (textMessage.indexOf('sad boi hours') > -1 || textMessage.indexOf('sadboi hours')) {
+    postMessage('@Chandler Clemmons', 24328365, [0, '@Chandler Clemmons'.length]);
+    return;
+  }
   var command = textMessage.text.split(' ')[0];
-  var query = textMessage.text.substr(textMessage.text.indexOf(' ') + 1);
+  var query = textMessage.text.substr(textMessage.text.indexOf(' ') + 1).replace('!', '');
   for (module of exports.modules) {
     if (command == '!' + module.commandString) {
       module.execute(query, function(responseText) {
@@ -25,7 +28,7 @@ function respond() {
   this.res.end();
 }
 
-function postMessage(response) {
+function postMessage(response, mention=undefined, mentionLoci=undefined) {
   var botResponse, options, body, botReq;
 
   options = {
@@ -38,6 +41,18 @@ function postMessage(response) {
     'bot_id' : botID,
     'text' : response
   };
+
+  if (mention) {
+    body["attachments"] = [
+      {
+        type: "mentions",
+        "user_ids": [mention],
+        "loci": [
+          mentionLoci
+        ]
+      }
+    ];
+  }
 
   console.log('sending ' + botResponse + ' to ' + botID);
 
