@@ -17,7 +17,7 @@ exports.execute = function (commandString, callback) {
         if (!json) { return; }
         var response = '';
         if (json.currently.icon == "rain") {
-            response += "Uh oh you should get an umbrella ☔ or you're gonna be so wet! 💦💦 It's gonna rain!\n"
+            response += "Uh oh you should bring an umbrella tomorrow ☔ or you're gonna be wet! 💦💦\n"
         } else if (json.currently.temperature < 60.0) {
             response += "it's gonna be COLD COLD COLD COLD COLD tomorrow wear a jacket 🧥🧥\n"
         } else if (json.currently.temperature > 80.0) {
