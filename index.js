@@ -13,6 +13,7 @@ bot.modules.push(require('./commands/source'));
 bot.modules.push(require('./commands/weather'));
 bot.modules.push(require('./commands/clap'));
 bot.modules.push(require('./commands/jurist'));
+bot.modules.push(require('./commands/trivia'));
 
 //
 

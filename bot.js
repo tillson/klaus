@@ -15,7 +15,9 @@ function respond() {
   for (module of exports.modules) {
     if (command == '!' + module.commandString) {
       module.execute(query, function(responseText) {
-        postMessage(responseText)
+        if (responseText) {
+          postMessage(responseText)
+        }
       })
       break;
     }
