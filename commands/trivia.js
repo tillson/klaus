@@ -33,7 +33,7 @@ exports.execute = function (commandString, callback) {
         if (!userResponse || userResponse > 4 || userResponse == 0) {
             return callback('');
         }
-        if (session_question[user_response - 1] == session_question.correct_answer) {
+        if (session_question[userResponse - 1] == session_question.correct_answer) {
             return callback('Correct!')
             session_question = undefined;
         } else {
