@@ -8,6 +8,9 @@ var COORDINATES = "33.774846,-84.397838"
 exports.execute = function (commandString, callback) {
     var query = commandString.toLowerCase();
     var date = chrono.parseDate(query);
+    if (!date) {
+        date = new Date();
+    }
     if (!process.env["DARKSKY_KEY"]) {
         return callback("Unable to fufill request.  Darksky API key is missing.");
     }
