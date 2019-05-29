@@ -4,7 +4,7 @@ var _chronoNode = _interopRequireDefault(require("chrono-node"));
 
 var _request = _interopRequireDefault(require("request"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.commandString = 'weather';
 var COORDINATES = "45.5155,122.6793";
@@ -12,7 +12,7 @@ var COORDINATES = "45.5155,122.6793";
 exports.execute = function (commandString, callback) {
   var query = commandString.toLowerCase();
 
-  var date = _chronoNode["default"].parseDate(query);
+  var date = _chronoNode.default.parseDate(query);
 
   if (!date) {
     date = new Date();
@@ -23,7 +23,7 @@ exports.execute = function (commandString, callback) {
   }
 
   var epochSeconds = Math.round(date.getTime() / 1000);
-  (0, _request["default"])('https://api.darksky.net/forecast/' + process.env.DARKSKY_KEY + '/' + COORDINATES + ',' + epochSeconds, function (error, resp, body) {
+  (0, _request.default)('https://api.darksky.net/forecast/' + process.env.DARKSKY_KEY + '/' + COORDINATES + ',' + epochSeconds, function (error, resp, body) {
     var json = JSON.parse(body);
 
     if (!json) {

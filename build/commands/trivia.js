@@ -2,7 +2,7 @@
 
 var request = require('request');
 
-var url_base = 'https://opentdb.com/api.php';
+let url_base = 'https://opentdb.com/api.php';
 var session_question;
 exports.commandString = 'trivia';
 
@@ -55,11 +55,9 @@ exports.execute = function (commandString, callback) {
 
 
 function shuffle(a) {
-  for (var i = a.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var _ref = [a[j], a[i]];
-    a[i] = _ref[0];
-    a[j] = _ref[1];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
 
   return a;
