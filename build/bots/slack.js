@@ -107,7 +107,7 @@ function (_Bot) {
     function () {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(text, channel) {
+      regeneratorRuntime.mark(function _callee2(message) {
         var response;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -115,18 +115,19 @@ function (_Bot) {
               case 0:
                 _context2.prev = 0;
 
-                if (channel) {
+                if (message && message.channel && message.text) {
                   _context2.next = 3;
                   break;
                 }
 
-                throw new Error("Channel must not be null in a Slack bot message.");
+                throw new Error('Channel and text must not be null in a Slack message.');
 
               case 3:
                 _context2.next = 5;
                 return _this.web.chat.postMessage({
-                  channel: channel,
-                  text: text
+                  channel: message.channel,
+                  text: message.text,
+                  icon_url: message.thumbnail ? message.thumbnail : null
                 });
 
               case 5:
@@ -147,7 +148,7 @@ function (_Bot) {
         }, _callee2, null, [[0, 8]]);
       }));
 
-      return function (_x2, _x3) {
+      return function (_x2) {
         return _ref2.apply(this, arguments);
       };
     }());

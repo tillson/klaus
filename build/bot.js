@@ -25,6 +25,10 @@ function () {
       return false;
     });
 
+    _defineProperty(this, "setComponents", function (components) {
+      _this.components = components;
+    });
+
     _defineProperty(this, "loadCommands", function () {
       //  if (this.options.defaultCommands) {
       _this.commands.push(require('./commands/ask'));
@@ -45,7 +49,7 @@ function () {
 
     });
 
-    _defineProperty(this, "sendMessage", function (message, channel) {});
+    _defineProperty(this, "sendMessage", function (message) {});
 
     this.functionalities = [];
     this.options = options;

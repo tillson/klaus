@@ -45,12 +45,18 @@ export default class SlackBot extends Bot {
   }
 
   /* Slack API */
-  sendMessage = async (text, channel) => {
+  sendMessage = async (message) => {
     try {
-      if (!channel) {
-        throw new Error("Channel must not be null in a Slack bot message.");
+      if (!(message && message.channel && message.text)) {
+        throw new Error('Channel and text must not be null in a Slack message.');
       }
-      const response = await this.web.chat.postMessage({ channel: channel, text: text });
+        const response = await this.web.chat.postMessage(
+          {
+            channel: message.channel,
+            text: message.text,
+            icon_url: message.thumbnail ? message.thumbnail : null
+          }
+         );
     } catch (err) {
       console.log(err);
     }

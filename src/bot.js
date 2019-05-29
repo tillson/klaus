@@ -9,28 +9,43 @@ export default class Bot {
   }
 
 
-routes(app) {
+  routes(app) {
 
-}
+  }
 
- hasFunctionality = (functionality) => {
-  return false;
- }
+  hasFunctionality = (functionality) => {
+    return false;
+  }
 
- loadCommands = () => {
-  //  if (this.options.defaultCommands) {
-     this.commands.push(require('./commands/ask'));
-     this.commands.push(require('./commands/clap'));
-     this.commands.push(require('./commands/phish'));
-     this.commands.push(require('./commands/shitpost'));
-     this.commands.push(require('./commands/source'));
-     this.commands.push(require('./commands/trivia'));
-     this.commands.push(require('./commands/urban'));
-     this.commands.push(require('./commands/weather'));
-  //  }
- }
+  setComponents = (components) => {
+    this.components = components;
+  }
 
- sendMessage = (message, channel) => {
- }
+  loadCommands = () => {
+    //  if (this.options.defaultCommands) {
+    this.commands.push(require('./commands/ask'));
+    this.commands.push(require('./commands/clap'));
+    this.commands.push(require('./commands/phish'));
+    this.commands.push(require('./commands/shitpost'));
+    this.commands.push(require('./commands/source'));
+    this.commands.push(require('./commands/trivia'));
+    this.commands.push(require('./commands/urban'));
+    this.commands.push(require('./commands/weather'));
+    //  }
+  }
+
+  /*
+  * Keep in mind that the least common denominator between chat messages is the `text` option.
+  * message:
+  * @param text `The text of the message` (required)
+  * @param channel `The channel to post in, if supported`
+  * @param thumbnail `Thumbnail to go with message`
+  * @param title `Title text for message`
+  * @param url `URL for message to link to`
+  */
+  sendMessage = (message) => {
+  }
+
+
 
 }
