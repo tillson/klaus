@@ -1,9 +1,10 @@
 export default class Bot {
 
   constructor(options) {
-    this.commands = [];
     this.functionalities = [];
-    // this.options = options;
+    this.options = options;
+    this.commands = options && options.commands ? this.options.commands : [];
+    this.components = options && options.components ? this.options.commands : [];
     this.loadCommands();
   }
 
@@ -27,6 +28,9 @@ routes(app) {
      this.commands.push(require('./commands/urban'));
      this.commands.push(require('./commands/weather'));
   //  }
+ }
+
+ sendMessage = (message, channel) => {
  }
 
 }
