@@ -1,14 +1,19 @@
-var chrono = require('chrono-node');
-var request = require('request');
+import chrono from 'chrono-node';
+import request from 'request';
 
 exports.commandString = 'phish';
 
 exports.execute = function(commandString, callback) {
+  console.log('phish' + commandString);
   var query = commandString.toLowerCase();
   if (query.indexOf('setlist') > -1 || query.indexOf('play')) {
     var date = chrono.parseDate(query);
-
-    request('http://phish.in/api/v1/shows/' + date.yyyymmdd(), function(error, resp, body) {
+    console.log(yyyymmdd(date));
+    request('http://phish.in/api/v1/shows/' + yyyymmdd(date),
+    {
+      headers: { 'Authorization': 'Bearer ' + process.env.PHISH_API }
+    },
+      function(error, resp, body) {
         var json = JSON.parse(body).data;
         if (!json) { return; }
         var response = json.date + ' ' + json.venue.name + ', ' + json.venue.location + '';
@@ -35,11 +40,14 @@ exports.execute = function(commandString, callback) {
   }
 };
 
-Date.prototype.yyyymmdd = function() {
-  var mm = this.getMonth() + 1; // getMonth() is zero-based
-  var dd = this.getDate();
+function yyyymmdd(date) {
+  if (!date) {
+    return;
+  }
+  var mm = date.getMonth() + 1; // getMonth() is zero-based
+  var dd = date.getDate();
 
-  return [this.getFullYear() + '-',
+  return [date.getFullYear() + '-',
           (mm>9 ? '' : '0') + mm + '-',
           (dd>9 ? '' : '0') + dd
          ].join('');
