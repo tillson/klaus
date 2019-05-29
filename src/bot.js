@@ -42,6 +42,7 @@ export default class Bot {
   * @param thumbnail `Thumbnail to go with message`
   * @param title `Title text for message`
   * @param url `URL for message to link to`
+  * @param username `Custom username`
   */
   sendMessage = (message) => {
   }

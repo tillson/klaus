@@ -126,8 +126,9 @@ function (_Bot) {
                 _context2.next = 5;
                 return _this.web.chat.postMessage({
                   channel: message.channel,
-                  text: message.text,
-                  icon_url: message.thumbnail ? message.thumbnail : null
+                  text: message.text + (message.url ? ' ' + message.url : ''),
+                  icon_url: message.thumbnail ? message.thumbnail : null,
+                  username: message.username ? message.username : null
                 });
 
               case 5:
