@@ -48,8 +48,8 @@ var _commandtrigger = _interopRequireDefault(require("./command/commandtrigger")
 
 var _ping = _interopRequireDefault(require("./command/ping"));
 
-var _slack = _interopRequireDefault(require("./bot/slack"));
+var _slack = _interopRequireDefault(require("./bots/slack"));
 
-var _groupme = _interopRequireDefault(require("./bot/groupme"));
+var _groupme = _interopRequireDefault(require("./bots/groupme"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
