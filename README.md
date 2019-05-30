@@ -9,3 +9,6 @@ Example command implementation: [Phish setlists](src/commands/phish.js)
 
 ### To-Do
 - Conform to XMPP spec
+- Discord and Alexa bot implementations
+- Red team plugin
+- Evaluate whether Bot's "functionalities" property is necessary

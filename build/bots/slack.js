@@ -40,7 +40,7 @@ class SlackBot extends _bot.default {
       });
     });
 
-    _defineProperty(this, "handleMessage", async payload => {
+    _defineProperty(this, "onMessageTrigger", async payload => {
       const text = payload.text.replace(/^\<.*\>\s/, "");
 
       for (var i = 0; i < this.commands.length; i++) {
@@ -75,6 +75,12 @@ class SlackBot extends _bot.default {
     this.challenge = '';
     this.web = new _webApi.WebClient(_options.SLACK_CLIENT_SECRET);
   }
+  /*
+  * Routes (override)
+  * We define some routes for our built-in trigger event
+  * onMessageTrigger to get data from.
+  */
+
 
 }
 

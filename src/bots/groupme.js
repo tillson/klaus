@@ -1,18 +1,46 @@
-// KlausBot for GroupMe
+// Klaus for GroupMe
+import Bot from '../bot';
+import HTTPS from 'https';
 
-class GroupMeBot extends Bot {
+export default class GroupMeBot extends Bot {
 
-  constructor(bot) {
-
+  constructor(options) {
+    super(options);
+    this.options = options;
+    this.challenge = '';
   }
 
-  routes = {
-    '/' : {
-      post: bot.respond,
-      get: ping
+
+  routes = (app) => {
+    const options = this.options;
+    const handleMessage = this.handleMessage;
+    app.post('/groupme/bot', function(req, res) {
+      if (req.body.token == options.GROUPME_BOT_ID) {
+        if (req.body.event) {
+          const event = req.body.event;
+          if (event.type == 'app_mention') {
+            handleMessage(event);
+          }
+        }
+        return res.status(200).send(req.body.challenge);
+      } else {
+        return res.status(403).json({status: 403, error: 'Unauthorized.'});
+      }
+    });
+  }
+
+  onMessageTrigger = async (payload) => {
+    const text = payload.text.replace(/^\<.*\>\s/, "");
+    for (var i = 0; i < this.commands.length; i++) {
+      var command = this.commands[i];
+      if (text.indexOf(command.commandString) > -1) {
+        command.execute(text, (response) => {
+          this.sendMessage(response, payload.channel);
+        });
+      }
     }
   }
-  BOT_ID = process.env.BOT_ID;
+
 
   sendMessage(message) {
     var options, body, botReq;
@@ -24,8 +52,8 @@ class GroupMeBot extends Bot {
     };
 
     body = {
-      'bot_id' : BOT_ID,
-      'text' : message
+      'bot_id' : this.options.BOT_ID,
+      'text' : message.text
     };
 
     botReq = HTTPS.request(options, function(res) {

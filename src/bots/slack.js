@@ -1,4 +1,8 @@
-// KlausBot for Slack
+/*
+* Klaus for Slack
+* Here, we implement Slack's app_mention event subscription
+* as a Klaus message trigger, and implement its sendMessage output.
+*/
 import Bot from '../bot';
 import { WebClient } from '@slack/web-api';
 
@@ -10,6 +14,11 @@ export default class SlackBot extends Bot {
     this.web = new WebClient(options.SLACK_CLIENT_SECRET);
   }
 
+  /*
+  * Routes (override)
+  * We define some routes for our built-in trigger event
+  * onMessageTrigger to get data from.
+  */
   routes = (app) => {
     const options = this.options;
     const handleMessage = this.handleMessage;
@@ -29,10 +38,11 @@ export default class SlackBot extends Bot {
     });
   }
 
-  // sendMessage(message) {
-  // }
-
-  handleMessage = async (payload) => {
+  /*
+  * On message trigger event (override)
+  * Slack bot receieved a message from one of its triggers.
+  */
+  onMessageTrigger = async (payload) => {
     const text = payload.text.replace(/^\<.*\>\s/, "");
     for (var i = 0; i < this.commands.length; i++) {
       var command = this.commands[i];
@@ -44,7 +54,10 @@ export default class SlackBot extends Bot {
     }
   }
 
-  /* Slack API */
+  /*
+  * Send message (override)
+  * Slack bots can send messages that its triggers send it.
+  */
   sendMessage = async (message) => {
     try {
       if (!(message && message.channel && message.text)) {

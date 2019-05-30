@@ -1,5 +1,6 @@
 import Bot from './bot';
-import SlackBot from './bots/slack'
-import ChatComponent from './chat-component';
+import SlackBot from './bots/slack';
+import GroupMeBot from './bots/groupme';
+import Trigger from './trigger';
 
-export { SlackBot, Bot, ChatComponent }
+export { SlackBot, GroupMeBot, Bot, Trigger }
