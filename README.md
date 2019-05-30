@@ -5,7 +5,7 @@ Originally a novelty bot, Klaus has transcended GroupMe to become a fully extens
 
 For an example 'bot' service implementation, see [Klaus's Slack persona](src/bots/slack.js).
 
-Example command implementation: [Phish setlists]('src/commands/phish.js')
+Example command implementation: [Phish setlists](src/commands/phish.js)
 
 ### To-Do
 - Conform to XMPP spec
