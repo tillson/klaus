@@ -1,8 +1,12 @@
-# KlausBot
-A nifty little GroupMe bot.
+# Klaus
+An extensible platform agnostic automation service.
 
-Make sure you set your BOT_ID environment variable to a valid [GroupMe bot ID](https://dev.groupme.com/bots) to test.
-Also set WOLFRAM_KEY to a Wolfram API key if you want the !push command to work.  You don't have to set WOLFRAM_KEY in order to test the bot, however.  same goes for the Dark Sky API.
+Originally a novelty bot, Klaus has transcended GroupMe to become a fully extensible automation tool. In addition to command-based invocations, you can create automation using the [ChatComponent](src/chat-component.js) api.
+
+For an example 'bot' service implementation, see [Klaus's Slack persona](klausbot/src/bots/slack.js).
 
 Example command implementation:
 https://github.com/tillson/klausbot/blob/master/commands/source.js
+
+### To-Do
+- Conform to XMPP spec
