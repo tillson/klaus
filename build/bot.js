@@ -23,23 +23,10 @@ class Bot {
       this.components = components;
     });
 
-    _defineProperty(this, "loadCommands", () => {
-      //  if (this.options.defaultCommands) {
-      this.commands.push(require('./commands/ask'));
-      this.commands.push(require('./commands/clap'));
-      this.commands.push(require('./commands/phish'));
-      this.commands.push(require('./commands/shitpost'));
-      this.commands.push(require('./commands/source'));
-      this.commands.push(require('./commands/trivia'));
-      this.commands.push(require('./commands/urban'));
-      this.commands.push(require('./commands/weather')); //  }
-    });
-
     this.functionalities = [];
-    this.options = options;
-    this.commands = options && options.commands ? this.options.commands : [];
-    this.components = options && options.components ? this.options.commands : [];
-    this.loadCommands();
+    this.options = options ? options : {};
+    this.commands = this.options.commands ? this.options.commands : [];
+    this.components = this.options.components ? this.options.commands : [];
   }
   /*
   * Routes
@@ -78,7 +65,6 @@ class Bot {
   * @param thumbnail `Thumbnail to go with message`
   * @param title `Title text for message`
   * @param url `URL for message to link to`
-  * @param username `Custom username`
   */
 
 

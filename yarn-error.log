@@ -1,0 +1,60 @@
+Arguments: 
+  /usr/local/bin/node /Users/tillsongalloway/.npm-global/bin/yarn install
+
+PATH: 
+  /usr/local/opt/openssl/bin:/Users/tillsongalloway/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/Library/TeX/texbin:/opt/X11/bin:/Applications/Wireshark.app/Contents/MacOS:/usr/local/opt/openssl/bin:/Users/tillsongalloway/google-cloud-sdk/bin:/Users/tillsongalloway/.npm-global/bin:/Users/tillsongalloway/bin:/Users/tillsongalloway/.go/bin:/usr/local/opt/go/libexec/bin:/Users/tillsongalloway/.fastlane/bin:/usr/local/sbin:/Users/tillsongalloway/.npm-global/bin:/Users/tillsongalloway/bin:${GOPATH}/bin:${GOROOT}/bin:/Users/tillsongalloway/.fastlane/bin:/usr/local/sbin
+
+Yarn version: 
+  1.13.0
+
+Node version: 
+  10.14.2
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/tillsongalloway/klaus/klausbot/package.json: Unexpected token } in JSON at position 515
+      at JSON.parse (<anonymous>)
+      at /Users/tillsongalloway/.npm-global/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/tillsongalloway/.npm-global/lib/node_modules/yarn/lib/cli.js:304:30)
+      at /Users/tillsongalloway/.npm-global/lib/node_modules/yarn/lib/cli.js:315:13
+
+npm manifest: 
+  {
+    "name": "klaus",
+    "version": "1.0.0",
+    "description": "A framework for making chatbots.",
+    "main": "build/index.js",
+    "scripts": {
+      "start": "nodemon --exec babel-node src/index.js",
+      "build": "babel -d ./build ./src",
+      "server": "nodemon --exec babel-node server",
+      "prebuild": "rm -rf build/*"
+    },
+    "dependencies": {
+      "@slack/web-api": "^5.0.1",
+      "body-parser": "^1.19.0",
+      "chrono-node": "^1.3.5",
+      "express": "^4.17.1",
+      "npm-run-all": "^4.1.5",
+      "request": "^2.88.0",
+    },
+    "devDependencies": {
+      "@babel/cli": "^7.4.4",
+      "@babel/core": "^7.4.5",
+      "@babel/node": "^7.4.5",
+      "@babel/plugin-proposal-class-properties": "^7.4.4",
+      "@babel/preset-env": "^7.4.5",
+      "babel-plugin-transform-runtime": "^6.23.0",
+      "babel-preset-es2015": "^6.24.0",
+      "rimraf": "^2.6.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

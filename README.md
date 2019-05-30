@@ -11,4 +11,4 @@ Example command implementation: [Phish setlists](src/commands/phish.js)
 - Conform to XMPP spec
 - Discord and Alexa bot implementations
 - Red team plugin
-- Evaluate whether Bot's "functionalities" property is necessary
+- Idea: Detatch bot object from component and use function parameters?

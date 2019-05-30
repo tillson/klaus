@@ -64,16 +64,15 @@ class SlackBot extends _bot.default {
           channel: message.channel,
           text: message.text + (message.url ? ' ' + message.url : ''),
           icon_url: message.thumbnail ? message.thumbnail : null,
-          username: message.username ? message.username : null
+          username: message.title ? message.title : null
         });
       } catch (err) {
         console.log(err);
       }
     });
 
-    this.options = _options;
     this.challenge = '';
-    this.web = new _webApi.WebClient(_options.SLACK_CLIENT_SECRET);
+    this.web = new _webApi.WebClient(this.options.SLACK_CLIENT_SECRET);
   }
   /*
   * Routes (override)

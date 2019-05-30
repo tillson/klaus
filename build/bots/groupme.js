@@ -54,7 +54,6 @@ class GroupMeBot extends _bot.default {
       }
     });
 
-    this.options = _options;
     this.challenge = '';
   }
 

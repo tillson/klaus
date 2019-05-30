@@ -9,9 +9,8 @@ import { WebClient } from '@slack/web-api';
 export default class SlackBot extends Bot {
   constructor(options) {
     super(options);
-    this.options = options;
     this.challenge = '';
-    this.web = new WebClient(options.SLACK_CLIENT_SECRET);
+    this.web = new WebClient(this.options.SLACK_CLIENT_SECRET);
   }
 
   /*
@@ -57,6 +56,7 @@ export default class SlackBot extends Bot {
   /*
   * Send message (override)
   * Slack bots can send messages that its triggers send it.
+  * Note that the Slack username field is actually Klaus's title field.
   */
   sendMessage = async (message) => {
     try {
@@ -68,7 +68,7 @@ export default class SlackBot extends Bot {
             channel: message.channel,
             text: message.text + (message.url ? ' ' + message.url : ''),
             icon_url: message.thumbnail ? message.thumbnail : null,
-            username: message.username ? message.username : null
+            username: message.title ? message.title : null
           }
          );
     } catch (err) {

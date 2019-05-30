@@ -6,10 +6,8 @@ export default class GroupMeBot extends Bot {
 
   constructor(options) {
     super(options);
-    this.options = options;
     this.challenge = '';
   }
-
 
   routes = (app) => {
     const options = this.options;

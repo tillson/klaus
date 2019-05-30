@@ -13,7 +13,7 @@ exports.default = void 0;
 class Trigger {
   constructor(bot, options) {
     this.bot = bot;
-    this.options = options;
+    this.options = options ? options : {};
   }
   /* Express routes for your component */
 
