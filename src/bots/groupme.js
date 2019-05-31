@@ -10,6 +10,7 @@ export default class GroupMeBot extends Bot {
   }
 
   routes = (app) => {
+    super.routes(app);
     const options = this.options;
     const handleMessage = this.handleMessage;
     app.post('/groupme/bot', function(req, res) {

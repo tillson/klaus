@@ -26,7 +26,7 @@ export default class Bot {
   routes(app) {
     for (var i = 0; i < this.components.length; i++) {
       if (this.components[i].routes) {
-        this.components[i].routes();
+        this.components[i].routes(app);
       }
     }
   }

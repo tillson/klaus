@@ -21,6 +21,7 @@ export default class SlackBot extends Bot {
   * onMessageTrigger to get data from.
   */
   routes = (app) => {
+    super.routes(app);
     const options = this.options;
     const onMessageTrigger = this.onMessageTrigger;
     app.post('/slack/eventSubscription', function(req, res) {
@@ -110,6 +111,7 @@ export default class SlackBot extends Bot {
           text: message.text + (message.url ? ' ' + message.url : ''),
           icon_url: message.thumbnail ? message.thumbnail : null,
           username: message.title ? message.title : null,
+          thread_ts: message.thread_ts,
           channel: message.channel
         }
         );
