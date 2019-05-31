@@ -6,6 +6,7 @@
 import Bot from '../bot';
 import { WebClient } from '@slack/web-api';
 import { CommandTrigger } from '../commands/commandtrigger';
+import crypto from 'crypto';
 
 export default class SlackBot extends Bot {
   constructor(options) {
@@ -20,23 +21,34 @@ export default class SlackBot extends Bot {
   * onMessageTrigger to get data from.
   */
   routes = (app) => {
-
     const options = this.options;
     const onMessageTrigger = this.onMessageTrigger;
     app.post('/slack/eventSubscription', function(req, res) {
-      if (req.body.token == options.SLACK_SIGNING_SECRET) {
+      if (req.body.challenge) {
+        // if (!this.isValidSlack(req.body)) {
+          // return res.status(403).json({status: 403, error: 'Unauthorized.'});
+        // }
+      }
+      if (req.body.token == options.SLACK_VERIFICATION_TOKEN) {
         if (req.body.event) {
           const event = req.body.event;
+          if (event.type == 'url_verification') {
+
+          }
           if (event.type == 'app_mention') {
             onMessageTrigger(event);
           }
         }
-        return res.status(200).send(req.body.challenge);
       } else {
         return res.status(403).json({status: 403, error: 'Unauthorized.'});
       }
-
+      res.send(req.body.challenge);
     });
+  }
+
+  isValidSlack = (body) => {
+    // to be implemented
+    return true;
   }
 
   /*

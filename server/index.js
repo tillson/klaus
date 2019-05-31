@@ -8,7 +8,6 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
-
 /* Enable your bots */
 const bot = new CLIBot();
 

@@ -11,6 +11,8 @@ var _webApi = require("@slack/web-api");
 
 var _commandtrigger = require("../commands/commandtrigger");
 
+var _crypto = _interopRequireDefault(require("crypto"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -23,23 +25,35 @@ class SlackBot extends _bot.default {
       const options = this.options;
       const onMessageTrigger = this.onMessageTrigger;
       app.post('/slack/eventSubscription', function (req, res) {
-        if (req.body.token == options.SLACK_SIGNING_SECRET) {
+        if (req.body.challenge) {// if (!this.isValidSlack(req.body)) {
+          // return res.status(403).json({status: 403, error: 'Unauthorized.'});
+          // }
+        }
+
+        if (req.body.token == options.SLACK_VERIFICATION_TOKEN) {
           if (req.body.event) {
             const event = req.body.event;
+
+            if (event.type == 'url_verification') {}
 
             if (event.type == 'app_mention') {
               onMessageTrigger(event);
             }
           }
-
-          return res.status(200).send(req.body.challenge);
         } else {
           return res.status(403).json({
             status: 403,
             error: 'Unauthorized.'
           });
         }
+
+        res.send(req.body.challenge);
       });
+    });
+
+    _defineProperty(this, "isValidSlack", body => {
+      // to be implemented
+      return true;
     });
 
     _defineProperty(this, "onMessageTrigger", async payload => {
