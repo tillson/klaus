@@ -58,12 +58,13 @@ class Bot {
   * sendMessage
   * @param message The message to send to an output.
   * Keep in mind that the least common denominator between chat messages is the `text` option.
-  * message:
-  * @param text `The text of the message` (required)
-  * @param channel `The channel to post in, if supported`
-  * @param thumbnail `Thumbnail to go with message`
-  * @param title `Title text for message`
-  * @param url `URL for message to link to`
+  * properties of the message parameter
+    * @param text `The text of the message` (required)
+    * @param channel `The channel to post in, if supported`
+    * @param thumbnail `Thumbnail to go with message`
+    * @param title `Title text for message`
+    * @param url `URL for message to link to`
+    * @param extra `Extra data to dump`
   */
 
 

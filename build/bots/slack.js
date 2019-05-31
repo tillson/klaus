@@ -69,6 +69,8 @@ class SlackBot extends _bot.default {
     });
 
     _defineProperty(this, "sendMessage", async (message, data) => {
+      data = data ? data : {};
+
       try {
         if (!message.text) {
           throw new Error('Channel and text must not be null in a Slack message.');
@@ -78,12 +80,36 @@ class SlackBot extends _bot.default {
           message.channel = this.options.channel;
         }
 
-        if (data && data.payload && data.payload.channel) {
+        if (data.payload && data.payload.channel) {
           message.channel = data.payload.channel;
+        }
+
+        if (data.payload && data.payload.thread) {
+          message.thread_ts = data.payload.thread;
         }
 
         if (!message.channel) {
           throw new Error('Slack messages must have a channel.');
+        }
+
+        if (message.extra) {
+          var messageString = '';
+
+          if (typeof message.extra === 'string') {
+            messageString = message.extra;
+          } else {
+            messageString = JSON.stringify(message.extra);
+          }
+
+          const file = await this.web.files.upload({
+            title: message.title,
+            channels: message.channel,
+            initial_comment: message.text,
+            filetype: 'text/plain',
+            content: messageString,
+            thread_ts: message.thread_ts
+          });
+          return file;
         }
 
         const response = await this.web.chat.postMessage({
@@ -93,6 +119,7 @@ class SlackBot extends _bot.default {
           username: message.title ? message.title : null,
           channel: message.channel
         });
+        return response;
       } catch (err) {
         console.log(err);
       }

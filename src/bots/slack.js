@@ -70,28 +70,50 @@ export default class SlackBot extends Bot {
   * Note that the Slack username field is actually Klaus's title field.
   */
   sendMessage = async (message, data) => {
-     try {
+    data = data ? data : {};
+    try {
       if (!message.text) {
         throw new Error('Channel and text must not be null in a Slack message.');
       }
       if (this.options.channel) {
         message.channel = this.options.channel;
       }
-      if (data && data.payload && data.payload.channel) {
+      if (data.payload && data.payload.channel) {
         message.channel = data.payload.channel;
+      }
+      if (data.payload && data.payload.thread) {
+        message.thread_ts = data.payload.thread;
       }
       if (!message.channel) {
         throw new Error('Slack messages must have a channel.');
       }
-        const response = await this.web.chat.postMessage(
-          {
-            // channel: message.channel ? message.channel : this TODO MAKE THIS RESPOND TO PEOPLE, ATTACHMENTS?,
-            text: message.text + (message.url ? ' ' + message.url : ''),
-            icon_url: message.thumbnail ? message.thumbnail : null,
-            username: message.title ? message.title : null,
-            channel: message.channel
-          }
-         );
+      if (message.extra) {
+        var messageString = ''
+        if (typeof message.extra === 'string') {
+          messageString = message.extra;
+        } else {
+          messageString = JSON.stringify(message.extra);
+        }
+        const file = await this.web.files.upload({
+          title: message.title,
+          channels: message.channel,
+          initial_comment: message.text,
+          filetype: 'text/plain',
+          content: messageString,
+          thread_ts: message.thread_ts
+        });
+        return file
+      }
+      const response = await this.web.chat.postMessage(
+        {
+          // channel: message.channel ? message.channel : this TODO MAKE THIS RESPOND TO PEOPLE, ATTACHMENTS?,
+          text: message.text + (message.url ? ' ' + message.url : ''),
+          icon_url: message.thumbnail ? message.thumbnail : null,
+          username: message.title ? message.title : null,
+          channel: message.channel
+        }
+        );
+      return response;
     } catch (err) {
       console.log(err);
     }
