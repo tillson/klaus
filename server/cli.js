@@ -5,14 +5,14 @@
 */
 import Bot from '../src/bot';
 import readline from 'readline';
-import CommandTrigger from '../src/command';
-import PingCommand from '../src/command/ping';
+import CommandTrigger from '../src/commands';
+import PingCommand from '../src/commands/ping';
 
 export default class CLIBot extends Bot {
 
   constructor(options) {
     super(options);
-    this.components.push(new PingCommand());
+    this.components.push(new PingCommand(this));
 
     this.initializeCLI();
   }
@@ -23,7 +23,7 @@ export default class CLIBot extends Bot {
   */
   onMessageTrigger = async (payload) => {
     for (var i = 0; i < this.components.length; i++) {
-      if (this.components[i] instanceof CommandTrigger && this.components[i].stringStartsWithCommand(payload.text)) {
+      if (this.components[i].commandString && this.components[i].stringStartsWithCommand(payload.text)) {
         this.components[i].handleCommand(payload.text);
       }
     }
@@ -34,7 +34,7 @@ export default class CLIBot extends Bot {
   * Slack bots can send messages that its triggers send it.
   * Note that the Slack username field is actually Klaus's title field.
   */
-  sendMessage = (message) => {
+  sendMessage = (message, data) => {
     try {
       if (message.title) {
         this.cli.write('### ' + message.title + ' ###');

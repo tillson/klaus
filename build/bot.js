@@ -25,7 +25,6 @@ class Bot {
 
     this.functionalities = [];
     this.options = options ? options : {};
-    this.commands = this.options.commands ? this.options.commands : [];
     this.components = this.options.components ? this.options.commands : [];
   }
   /*
@@ -68,7 +67,7 @@ class Bot {
   */
 
 
-  sendMessage(message) {}
+  sendMessage(message, data) {}
 
 }
 

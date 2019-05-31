@@ -57,7 +57,7 @@ class GroupMeBot extends _bot.default {
     this.challenge = '';
   }
 
-  sendMessage(message) {
+  sendMessage(message, data) {
     var options, body, botReq;
     options = {
       hostname: 'api.groupme.com',

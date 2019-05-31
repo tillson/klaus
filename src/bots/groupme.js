@@ -40,7 +40,7 @@ export default class GroupMeBot extends Bot {
   }
 
 
-  sendMessage(message) {
+  sendMessage(message, data) {
     var options, body, botReq;
 
     options = {

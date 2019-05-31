@@ -15,8 +15,10 @@ class PingCommand extends _commandtrigger.default {
   constructor(bot, options) {
     super(bot, options);
 
-    _defineProperty(this, "handleCommand", commandString => {
-      console.log('Pong!');
+    _defineProperty(this, "handleCommand", (commandString, data) => {
+      this.bot.sendMessage({
+        text: 'Pong!'
+      }, data);
     });
 
     this.commandString = 'ping';

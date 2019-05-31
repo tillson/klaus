@@ -6,8 +6,8 @@ class PingCommand extends CommandTrigger {
     this.commandString = 'ping';
   }
 
-  handleCommand = (commandString) => {
-    console.log('Pong!');
+  handleCommand = (commandString, data) => {
+    this.bot.sendMessage({text: 'Pong!'}, data);
   }
 }
 

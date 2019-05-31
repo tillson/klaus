@@ -24,7 +24,7 @@ class CommandTrigger extends Trigger {
   /*
   * Subclasses should implement handleCommand
   */
-  handleCommand(commandString) {
+  handleCommand(commandString, data) {
 
   }
 

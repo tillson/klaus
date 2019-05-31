@@ -1,7 +1,7 @@
 import Bot from './bot';
 import Trigger from './trigger';
-import CommandTrigger from './command/commandtrigger';
-import PingCommand from './command/ping';
+import CommandTrigger from './commands/commandtrigger';
+import PingCommand from './commands/ping';
 import SlackBot from './bots/slack';
 import GroupMeBot from './bots/groupme';
 

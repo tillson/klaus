@@ -44,9 +44,9 @@ var _bot = _interopRequireDefault(require("./bot"));
 
 var _trigger = _interopRequireDefault(require("./trigger"));
 
-var _commandtrigger = _interopRequireDefault(require("./command/commandtrigger"));
+var _commandtrigger = _interopRequireDefault(require("./commands/commandtrigger"));
 
-var _ping = _interopRequireDefault(require("./command/ping"));
+var _ping = _interopRequireDefault(require("./commands/ping"));
 
 var _slack = _interopRequireDefault(require("./bots/slack"));
 

@@ -9,6 +9,8 @@ var _bot = _interopRequireDefault(require("../bot"));
 
 var _webApi = require("@slack/web-api");
 
+var _commandtrigger = require("../commands/commandtrigger");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -19,14 +21,14 @@ class SlackBot extends _bot.default {
 
     _defineProperty(this, "routes", app => {
       const options = this.options;
-      const handleMessage = this.handleMessage;
+      const onMessageTrigger = this.onMessageTrigger;
       app.post('/slack/eventSubscription', function (req, res) {
         if (req.body.token == options.SLACK_SIGNING_SECRET) {
           if (req.body.event) {
             const event = req.body.event;
 
             if (event.type == 'app_mention') {
-              handleMessage(event);
+              onMessageTrigger(event);
             }
           }
 
@@ -43,28 +45,39 @@ class SlackBot extends _bot.default {
     _defineProperty(this, "onMessageTrigger", async payload => {
       const text = payload.text.replace(/^\<.*\>\s/, "");
 
-      for (var i = 0; i < this.commands.length; i++) {
-        var command = this.commands[i];
-
-        if (text.indexOf(command.commandString) > -1) {
-          command.execute(text, response => {
-            this.sendMessage(response, payload.channel);
+      for (var i = 0; i < this.components.length; i++) {
+        if (this.components[i].commandString && this.components[i].stringStartsWithCommand(text)) {
+          this.components[i].handleCommand(text, {
+            payload: payload
           });
         }
       }
     });
 
-    _defineProperty(this, "sendMessage", async message => {
+    _defineProperty(this, "sendMessage", async (message, data) => {
       try {
-        if (!(message && message.channel && message.text)) {
+        if (!message.text) {
           throw new Error('Channel and text must not be null in a Slack message.');
         }
 
+        if (this.options.channel) {
+          message.channel = this.options.channel;
+        }
+
+        if (data && data.payload && data.payload.channel) {
+          message.channel = data.payload.channel;
+        }
+
+        if (!message.channel) {
+          throw new Error('Slack messages must have a channel.');
+        }
+
         const response = await this.web.chat.postMessage({
-          channel: message.channel,
+          // channel: message.channel ? message.channel : this TODO MAKE THIS RESPOND TO PEOPLE, ATTACHMENTS?,
           text: message.text + (message.url ? ' ' + message.url : ''),
           icon_url: message.thumbnail ? message.thumbnail : null,
-          username: message.title ? message.title : null
+          username: message.title ? message.title : null,
+          channel: message.channel
         });
       } catch (err) {
         console.log(err);

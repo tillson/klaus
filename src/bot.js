@@ -14,7 +14,6 @@ export default class Bot {
   constructor(options) {
     this.functionalities = [];
     this.options = options ? options : {};
-    this.commands = this.options.commands ? this.options.commands : [];
     this.components = this.options.components ? this.options.commands : [];
   }
 
@@ -60,7 +59,7 @@ export default class Bot {
   * @param title `Title text for message`
   * @param url `URL for message to link to`
   */
-  sendMessage(message) {
+  sendMessage(message, data) {
 
   }
 

@@ -32,7 +32,7 @@ class CommandTrigger extends _trigger.default {
   */
 
 
-  handleCommand(commandString) {}
+  handleCommand(commandString, data) {}
 
 }
 
