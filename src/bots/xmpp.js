@@ -1,17 +1,13 @@
-/*
-* Klaus for Slack
-* Here, we implement Slack's app_mention event subscription
-* as a Klaus message trigger, and implement its sendMessage output.
-*/
 import Bot from '../bot';
-import { WebClient } from '@slack/web-api';
 import { CommandTrigger } from '../commands/commandtrigger';
 import crypto from 'crypto';
 
-export default class SlackBot extends Bot {
+export default class XmppBot extends Bot {
   constructor(options) {
     super(options);
     this.challenge = '';
+    this.jid = this.options.jid;
+    this.XMPP_SERVER = this.options.XMPP_SERVER;
     this.web = new WebClient(this.options.SLACK_CLIENT_SECRET);
   }
 
@@ -81,9 +77,6 @@ export default class SlackBot extends Bot {
       }
       if (data.payload && data.payload.channel) {
         message.channel = data.payload.channel;
-      }
-      if (data.payload && data.payload.ts) {
-        message.thread_ts = data.payload.ts;
       }
       if (data.payload && data.payload.thread) {
         message.thread_ts = data.payload.thread;

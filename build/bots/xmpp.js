@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _bot = _interopRequireDefault(require("../bot"));
 
-var _webApi = require("@slack/web-api");
-
 var _commandtrigger = require("../commands/commandtrigger");
 
 var _crypto = _interopRequireDefault(require("crypto"));
@@ -17,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class SlackBot extends _bot.default {
+class XmppBot extends _bot.default {
   constructor(_options) {
     super(_options);
 
@@ -85,10 +83,6 @@ class SlackBot extends _bot.default {
           message.channel = data.payload.channel;
         }
 
-        if (data.payload && data.payload.ts) {
-          message.thread_ts = data.payload.ts;
-        }
-
         if (data.payload && data.payload.thread) {
           message.thread_ts = data.payload.thread;
         }
@@ -132,7 +126,9 @@ class SlackBot extends _bot.default {
     });
 
     this.challenge = '';
-    this.web = new _webApi.WebClient(this.options.SLACK_CLIENT_SECRET);
+    this.jid = this.options.jid;
+    this.XMPP_SERVER = this.options.XMPP_SERVER;
+    this.web = new WebClient(this.options.SLACK_CLIENT_SECRET);
   }
   /*
   * Routes (override)
@@ -143,4 +139,4 @@ class SlackBot extends _bot.default {
 
 }
 
-exports.default = SlackBot;
+exports.default = XmppBot;
