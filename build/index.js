@@ -39,6 +39,12 @@ Object.defineProperty(exports, "GroupMeBot", {
     return _groupme.default;
   }
 });
+Object.defineProperty(exports, "DockerResponder", {
+  enumerable: true,
+  get: function () {
+    return _docker.default;
+  }
+});
 
 var _bot = _interopRequireDefault(require("./bot"));
 
@@ -51,5 +57,7 @@ var _ping = _interopRequireDefault(require("./commands/ping"));
 var _slack = _interopRequireDefault(require("./bots/slack"));
 
 var _groupme = _interopRequireDefault(require("./bots/groupme"));
+
+var _docker = _interopRequireDefault(require("./responders/docker"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

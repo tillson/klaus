@@ -16,19 +16,14 @@ class DockerResponder extends Responder {
   }
 
   async run(parameters, data) {
-    if (!parameters.image) { return this.bot.sendMessage({ text: 'I\'m having some trouble helping with that.' }); }
+    if (!parameters.image) { return this.bot.sendMessage({ text: 'I\'m having some trouble helping with that.' }, data); }
     const docker = new Docker(this.options.dockerOptions);
     const file = '/tmp/docker-' + crypto.randomBytes(8).toString('hex');
     const writeStream = fs.createWriteStream(file);
-    try {
-      const container = await docker
-        .run(parameters.image, parameters.parameters, writeStream);
-      const data = await fs.readFileSync(file);
-      return data.toString();
-    } catch (err) {
-      return this.bot.sendMessage({ text: 'I\'m having some trouble helping with that.' });
-    }
-  }
+    await docker.run(parameters.image, parameters.parameters, writeStream);
+    const dockerData = await fs.readFileSync(file, 'utf8');
+    return dockerData;
+}
 }
 
 export default DockerResponder;

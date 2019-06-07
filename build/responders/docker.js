@@ -32,7 +32,7 @@ class DockerResponder extends _responder.default {
     if (!parameters.image) {
       return this.bot.sendMessage({
         text: 'I\'m having some trouble helping with that.'
-      });
+      }, data);
     }
 
     const docker = new _dockerode.default(this.options.dockerOptions);
@@ -41,15 +41,9 @@ class DockerResponder extends _responder.default {
 
     const writeStream = _fs.default.createWriteStream(file);
 
-    try {
-      const container = await docker.run(parameters.image, parameters.parameters, writeStream);
-      const data = await _fs.default.readFileSync(file);
-      return data.toString();
-    } catch (err) {
-      return this.bot.sendMessage({
-        text: 'I\'m having some trouble helping with that.'
-      });
-    }
+    await docker.run(parameters.image, parameters.parameters, writeStream);
+    const dockerData = await _fs.default.readFileSync(file, 'utf8');
+    return dockerData;
   }
 
 }
