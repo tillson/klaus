@@ -9,10 +9,10 @@ Object.defineProperty(exports, "Bot", {
     return _bot.default;
   }
 });
-Object.defineProperty(exports, "Trigger", {
+Object.defineProperty(exports, "Responder", {
   enumerable: true,
   get: function () {
-    return _trigger.default;
+    return _responder.default;
   }
 });
 Object.defineProperty(exports, "CommandTrigger", {
@@ -42,7 +42,7 @@ Object.defineProperty(exports, "GroupMeBot", {
 
 var _bot = _interopRequireDefault(require("./bot"));
 
-var _trigger = _interopRequireDefault(require("./trigger"));
+var _responder = _interopRequireDefault(require("./responders/responder"));
 
 var _commandtrigger = _interopRequireDefault(require("./commands/commandtrigger"));
 

@@ -1,10 +1,10 @@
-import Trigger from '../trigger';
+import Responder from '../responders/responder';
 
 /*
 * Command Trigger
 * A good ol' commandName and commandString
 */
-class CommandTrigger extends Trigger {
+class CommandTrigger extends Responder {
 
   constructor(bot, options) {
     super(bot, options);

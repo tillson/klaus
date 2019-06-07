@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _trigger = _interopRequireDefault(require("../trigger"));
+var _responder = _interopRequireDefault(require("../responders/responder"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 * Command Trigger
 * A good ol' commandName and commandString
 */
-class CommandTrigger extends _trigger.default {
+class CommandTrigger extends _responder.default {
   constructor(bot, options) {
     super(bot, options);
     this.commandPrefix = this.options.commandPrefix ? this.options.commandPrefix : '';

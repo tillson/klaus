@@ -1,8 +1,8 @@
 import Bot from './bot';
-import Trigger from './trigger';
+import Responder from './responders/responder';
 import CommandTrigger from './commands/commandtrigger';
 import PingCommand from './commands/ping';
 import SlackBot from './bots/slack';
 import GroupMeBot from './bots/groupme';
 
-export { Bot, Trigger, PingCommand, CommandTrigger, SlackBot, GroupMeBot };
+export { Bot, Responder, PingCommand, CommandTrigger, SlackBot, GroupMeBot };
