@@ -1,5 +1,5 @@
 # Klaus
-An extensible, platform agnostic, XMPP compliant automation service.
+An extensible, platform agnostic automation service.
 
 Originally a novelty bot, Klaus has transcended GroupMe to become a fully extensible automation tool. In addition to command-based invocations, you can create automation using the [ChatComponent](src/chat-component.js) api.
 
